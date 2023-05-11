@@ -9,7 +9,9 @@
         <h2 class="text-center my-4">About</h2>
         <p class="lead">Looking for a job but don't know where to start? Check out our job search website that offers a wide range of job listings in various industries and locations. You can search by job title, location, company, salary, and more. Create a profile to receive personalized job alerts and save your favorite job postings. Our website also provides career advice, interview tips, and resume building tools to help you land your dream job. Start your job search today and take the first step towards a fulfilling career.</p>
         <h2 class="text-center my-4">Open positions</h2>
-        <p>TODO - jobs are here<p>
+        {% for item in jobs %}
+            {% include 'jobitem.html' %}
+        {% endfor %}
         <div class="text-center">
             <button class="btn btn-primary btn-lg mb-4">Contact us</button>
             <p>Copyright</p>
