@@ -8,15 +8,6 @@ PASSWORD = os.getenv("PASSWORD")
 DATABASE = os.getenv("DATABASE")
 HOST = os.getenv("HOST")
 URI = f"mysql+pymysql://{LOGIN}:{PASSWORD}@{HOST}/{DATABASE}?charset=utf8mb4"
-# sql_url = engine.url.URL(
-#     drivername="mysql+pymysql",
-#     username=LOGIN,
-#     password=PASSWORD,
-#     host=HOST,
-#     port=3306,
-#     database=DATABASE,
-#     query={"ssl_ca": "main_app/certs/BaltimoreCyberTrustRoot.crt.pem"},
-# )
 
 engine = create_engine(
     URI,
@@ -27,6 +18,10 @@ engine = create_engine(
     }
 )
 
-with engine.connect() as conn:
-    result = conn.execute(text("SELECT * FROM jobs"))
-    print(result.all())
+def load_jobs_from_db():
+    with engine.connect() as conn:
+        result = conn.execute(text("SELECT * FROM jobs;"))
+        jobs = []
+        for row in result.all():
+            jobs.append(row)
+        return jobs
